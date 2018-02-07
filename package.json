@@ -10,7 +10,7 @@
     "lint": "eslint ./src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Vladilen Minin",
+  "author": "Kravtsov Roman",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.13.2",
@@ -32,7 +32,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "react": "^15.3.0",
-    "react-dom": "^15.3.0"
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2"
   }
 }
