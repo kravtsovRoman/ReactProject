@@ -1,4 +1,3 @@
-export HomePage from "./home.js";
-export HomeRoutes from "./routes";
-
+export HomePage from './home';
+export HomeRoutes from './routes';
 

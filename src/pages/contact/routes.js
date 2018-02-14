@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router';
-import HomePage from './home';
+import ContactPage from './contact';
 
 export default (
     <Route>
-        <Route component={ HomePage } path={ HomePage.path } />
+        <Route component={ ContactPage } path={ ContactPage.path } />
     </Route>
 );
