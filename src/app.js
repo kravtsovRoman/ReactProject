@@ -3,20 +3,20 @@ import { Header } from './components/index';
 import { DevTools } from './utils/index';
 
 export default class App extends React.Component {
-    
+
     static propTypes = {
-        children: PropTypes.any.isRequired  
+        children: PropTypes.any.isRequired
     };
     static path = '/';
-    
+
     render() {
         return (
-            <div>
+            <div className='container-fluid' >
                 <Header />
                 { this.props.children }
                 { process.env.NODE_ENV !== 'production' ? <DevTools /> : null }
             </div>
         );
     }
-    
+
 }

@@ -10,7 +10,7 @@
     "lint": "eslint ./src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Kravtsov Roman",
+  "author": "Vladilen Minin",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
@@ -30,18 +30,19 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "react-hot-loader": "^1.3.0",
+    "redux-thunk": "^2.1.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "bootstrap": "^4.0.0",
     "classnames": "^2.2.5",
+    "lodash": "^4.15.0",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
-    "react-redux": "^4.4.8",
-    "react-router": "^2.8.1",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.6.1",
     "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",
     "redux-devtools": "^3.3.1",

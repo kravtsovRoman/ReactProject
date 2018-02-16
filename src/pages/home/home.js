@@ -1,10 +1,16 @@
 import React, { PropTypes } from 'react';
-import Input from '../../components/ui/input/index';
-import { LS } from '../../utils/index';
 import { bindAll } from 'lodash';
 import { connect } from 'react-redux';
+import {
+    addTodo,
+    likeTodo,
+    deleteTodo,
+    getTodos
+} from './actions';
+import Input from '../../components/ui/input/index';
+import Loader from '../../components/ui/loader/index';
 import classnames from 'classnames';
-import { addTodo, likeTodo, deleteTodo } from './actions';
+import { LS } from '../../utils/index';
 import './styles.less';
 
 class HomePage extends React.Component {
@@ -23,6 +29,8 @@ class HomePage extends React.Component {
         };
 
         bindAll(this, ['renderTodos', 'inputOnChange', 'addTodo']);
+
+        this.props.dispatch( getTodos() );
     }
 
     inputOnChange(value) {
@@ -30,45 +38,50 @@ class HomePage extends React.Component {
     }
 
     addTodo() {
-        const { todos } = this.props.home;
-        const id = todos[todos.length - 1].id + 1;
-        const name = this.state.todoName;
-        this.props.dispatch( addTodo(id, name) );
+        this.props.dispatch( addTodo(this.props.home.todos, this.state.todoName) );
         this.setState({ todoName: ''});
     }
 
     renderTodos(item, idx) {
-        const todoClasses = classnames('b-home-todo', { 'is-liked': item.liked });
-        const btnClasses = classnames( 'btn', {'active': item.liked});
+        const todoClasses = classnames('b-home-todo', {
+            'is-liked': item.liked
+        });
+        const btnClasses = classnames('btn', {
+            'active': item.liked
+        });
         return (
             <li key={ idx }>
                 <span className={ todoClasses }>{ item.name }</span>
                 <div>
-                    <button className={ btnClasses } onClick={this.likeTodo.bind(this, item)} >&#10084;</button>
-                    <button className={'btn'} onClick={this.deleteTodo.bind(this, item)} >&#10006;</button>
+                    <button className={ btnClasses } onClick={ this.likeTodo.bind(this, item) }><i className='glyphicon glyphicon-heart' /></button>
+                    <button className='btn' onClick={ this.deleteTodo.bind(this, item) }><i className='glyphicon glyphicon-remove' /></button>
                 </div>
-
-
             </li>
         );
     }
 
     deleteTodo(todo) {
-        this.props.dispatch( deleteTodo(todo));
+        this.props.dispatch( deleteTodo(todo) );
     }
 
     likeTodo(todo) {
-        this.props.dispatch(likeTodo(todo));
+        this.props.dispatch( likeTodo(todo) );
     }
 
     render() {
         const { todoName } = this.state;
-        const { todos, error } = this.props.home;
+        const { todos, error, isLoading } = this.props.home;
+        LS.set('todos', todos);
         return (
             <div className='row-fluid b-home'>
                 <div className='col-xs-12'>
                     <ul>
-                        { todos.map(this.renderTodos) }
+                        { isLoading
+                            ? <Loader />
+                            : todos.length !== 0
+                                ? todos.map(this.renderTodos)
+                                : 'Элементов нет'
+                        }
                     </ul>
                     <div className='col-xs-4'>
                         <Input
@@ -76,17 +89,11 @@ class HomePage extends React.Component {
                             value={ todoName }
                             error={ error }
                         />
-                        <button className='btn btn-primary' onClick={ this.addTodo }>Add todo</button>
+                        <button className='btn btn-primary b-home-submit' onClick={ this.addTodo }>Add todo</button>
                     </div>
                 </div>
             </div>
         );
-    }
-
-    componentWillUnmount() {
-        console.log('123');
-         LS.set('todos', this.props.home.todos);
-
     }
 
 }
