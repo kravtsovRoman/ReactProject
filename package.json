@@ -1,7 +1,7 @@
 {
   "name": "react-practice",
   "version": "1.0.0",
-  "description": "",
+  "description": "React SPA: ToDo, List, Update...",
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --inline --hot",
