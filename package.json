@@ -10,7 +10,7 @@
     "lint": "eslint ./src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Vladilen Minin",
+  "author": "Kravtsov Roman",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",

@@ -8,7 +8,7 @@ function _getMiddleware() {
     const middleware = [
         thunk
     ];
-    
+
     return applyMiddleware(...middleware);
 }
 
@@ -16,8 +16,8 @@ function _getMiddleware() {
 export default function configureStore(initialState) {
     const store = compose(
         _getMiddleware(),
-        DevTools.instrument()  
+        DevTools.instrument()
     )(createStore)(rootReducer, initialState);
-    
+
     return store;
 }
