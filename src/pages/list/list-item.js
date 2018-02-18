@@ -2,12 +2,15 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { openModal } from '../../components/modal/index';
+import { editItem } from './actions';
+import EditModal from './edit-modal';
 
 class ListItem extends React.Component {
 
     static propTypes = {
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
+        youtube: PropTypes.string.isRequired,
         dispatch: PropTypes.func.isRequired
     };
 
@@ -19,8 +22,15 @@ class ListItem extends React.Component {
     };
 
     edit() {
-        this.props.dispatch( openModal() );
-    } 
+
+        const { id, name, youtube } = this.props;
+
+        this.props.dispatch( openModal( {
+            content: <EditModal id={ id } name={ name } youtube={ youtube } onSave={ editItem } />,
+            title: 'Edit... ',
+            btnText: 'Save'
+        } ) );
+    }
 
     render() {
         return (
